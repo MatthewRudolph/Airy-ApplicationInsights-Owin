@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-
-namespace Dematt.Airy.ApplicationInsights.Sample.Controllers
+﻿namespace Dematt.Airy.ApplicationInsights.Sample.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Http;
+
+    [RoutePrefix("api/values")]
     public class ValuesController : ApiController
     {
         // GET api/values
+        [Route("")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

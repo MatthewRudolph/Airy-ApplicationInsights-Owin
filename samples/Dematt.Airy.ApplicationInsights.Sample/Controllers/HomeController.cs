@@ -8,6 +8,7 @@ namespace Dematt.Airy.ApplicationInsights.Sample.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("~/")]
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
