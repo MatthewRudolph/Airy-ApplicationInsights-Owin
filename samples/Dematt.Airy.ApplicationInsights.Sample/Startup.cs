@@ -7,6 +7,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Dematt.Airy.ApplicationInsights.Owin;
+using Dematt.Airy.ApplicationInsights.Sample.ActionFilters;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 using Owin;
 
 namespace Dematt.Airy.ApplicationInsights.Sample
@@ -23,6 +27,14 @@ namespace Dematt.Airy.ApplicationInsights.Sample
         public void Configuration(IAppBuilder app)
         {
             HttpConfig = new HttpConfiguration();
+
+            HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new WebApiRouteFilterOptions {IncludeParamterNames = false}));
+            GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new WebApiRouteFilterOptions {IncludeParamterNames = false}));
+
+            //HttpConfig.MessageHandlers.Add(new GetRouteMessageHandler());
+
+            //app.UseApplicationInsightsOwin();
+            app.Use<RequestTrackingMiddleware>(new TelemetryClient());
 
             app.Use(new Func<AppFunc, AppFunc>(next => (async env =>
             {
