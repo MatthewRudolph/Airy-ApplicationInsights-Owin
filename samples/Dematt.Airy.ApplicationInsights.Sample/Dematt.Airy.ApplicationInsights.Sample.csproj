@@ -169,9 +169,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionFilters\MvcRouteFilterAttribute.cs" />
-    <Compile Include="ActionFilters\WebApiRouteFilterAttribute.cs" />
-    <Compile Include="ActionFilters\WebApiRouteFilterOptions.cs" />
     <Compile Include="AiHandleErrorAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
