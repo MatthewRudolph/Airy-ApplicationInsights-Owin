@@ -4,15 +4,24 @@ using System.Web.Http.Filters;
 
 namespace Dematt.Airy.ApplicationInsights.Owin.ActionFilters
 {
+    /// <summary>
+    /// Web API Filter Attribute that stores information about the controller and action used (including optionally the parameter names) in the owin context.
+    /// </summary>
     public class WebApiRouteFilterAttribute : ActionFilterAttribute
     {
         private readonly RouteFilterOptions _options;
 
+        /// <summary>
+        /// Creates an instance of the <see cref="WebApiRouteFilterAttribute"/> using the options passed.
+        /// </summary>
         public WebApiRouteFilterAttribute(RouteFilterOptions options)
         {
             _options = options;
         }
 
+        /// <summary>
+        /// Overrides the on action executing storing the controller and action used (including optionally the parameter names) in the owin context.
+        /// </summary>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             string controllerName = actionContext.ControllerContext.ControllerDescriptor.ControllerName;

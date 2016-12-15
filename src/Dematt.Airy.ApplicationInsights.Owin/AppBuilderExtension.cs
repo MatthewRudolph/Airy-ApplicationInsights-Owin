@@ -1,4 +1,5 @@
-﻿using Microsoft.ApplicationInsights;
+﻿using Dematt.Airy.ApplicationInsights.Owin.Middleware;
+using Microsoft.ApplicationInsights;
 using Owin;
 
 namespace Dematt.Airy.ApplicationInsights.Owin

@@ -6,7 +6,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.Owin;
 
-namespace Dematt.Airy.ApplicationInsights.Owin
+namespace Dematt.Airy.ApplicationInsights.Owin.Middleware
 {
     /// <summary>
     /// Owin middleware that captures request telemetry information and sends it to application insights.

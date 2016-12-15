@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace Dematt.Airy.ApplicationInsights.Owin.ActionFilters
 {
+    /// <summary>
+    /// MVC Filter Attribute that stores information about the controller and action used (including optionally the parameter names) in the owin context.
+    /// </summary>
     public class MvcRouteFilterAttribute : ActionFilterAttribute
     {
         private readonly RouteFilterOptions _options;
 
+        /// <summary>
+        /// Creates an instance of the <see cref="MvcRouteFilterAttribute"/> using the options passed.
+        /// </summary>
         public MvcRouteFilterAttribute(RouteFilterOptions options)
         {
             _options = options;
         }
 
+        /// <summary>
+        /// Overrides the on action executing storing the controller and action used (including optionally the parameter names) in the owin context.
+        /// </summary>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;

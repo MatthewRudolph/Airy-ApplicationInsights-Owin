@@ -106,7 +106,7 @@
     <Compile Include="ActionFilters\WebApiRouteFilterAttribute.cs" />
     <Compile Include="AppBuilderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestTrackingMiddleware.cs" />
+    <Compile Include="Middleware\RequestTrackingMiddleware.cs" />
     <Compile Include="SdkVersionUtils.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Dematt.Airy.ApplicationInsights.Owin;
+using Dematt.Airy.ApplicationInsights.Owin.Middleware;
 using Dematt.Airy.ApplicationInsights.Sample.ActionFilters;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
