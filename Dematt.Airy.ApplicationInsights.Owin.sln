@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dematt.Airy.ApplicationInsi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dematt.Airy.ApplicationInsights.Owin", "src\Dematt.Airy.ApplicationInsights.Owin\Dematt.Airy.ApplicationInsights.Owin.csproj", "{6EED8BA4-1964-4D64-AF0C-0B064E4E6229}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9233396F-56B3-4B78-ACE9-8F774B0B21BA}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
