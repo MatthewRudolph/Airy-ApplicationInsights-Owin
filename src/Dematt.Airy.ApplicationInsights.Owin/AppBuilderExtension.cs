@@ -1,6 +1,8 @@
 ﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
 using Dematt.Airy.ApplicationInsights.Owin.ActionFilters;
+using Dematt.Airy.ApplicationInsights.Owin.ExceptionTracking;
 using Dematt.Airy.ApplicationInsights.Owin.Middleware;
 using Microsoft.ApplicationInsights;
 using Owin;
@@ -20,10 +22,12 @@ namespace Dematt.Airy.ApplicationInsights.Owin
         {
             telemetryClient = telemetryClient ?? new TelemetryClient();
 
-            builder.Use<RequestTrackingMiddleware>(telemetryClient);
+            // ***IT IS IMPORTANT TO ADD ANY CUSTOM EXCEPTION LOGGERS BEFORE ANY OTHER CONFIGURATION***
+            httpConfiguration.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));
 
             httpConfiguration.Filters.Add(new WebApiRouteFilterAttribute(options));
             GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(options));
+            builder.Use<RequestTrackingMiddleware>(telemetryClient);
 
             return builder;
         }

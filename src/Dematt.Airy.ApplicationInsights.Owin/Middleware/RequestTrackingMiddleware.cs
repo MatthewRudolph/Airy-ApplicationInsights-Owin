@@ -49,9 +49,18 @@ namespace Dematt.Airy.ApplicationInsights.Owin.Middleware
             {
                 await Next.Invoke(context);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 requestFailed = true;
+                var exceptionTelemetry = new ExceptionTelemetry(ex);
+
+                if (context.Response.StatusCode >= 500)
+                {
+                    exceptionTelemetry.SeverityLevel = SeverityLevel.Critical;
+                }
+
+                _telemetryClient.TrackException(exceptionTelemetry);
+
                 throw;
             }
             finally
