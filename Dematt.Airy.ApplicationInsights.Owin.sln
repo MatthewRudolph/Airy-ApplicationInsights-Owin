@@ -13,11 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dematt.Airy.ApplicationInsi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9233396F-56B3-4B78-ACE9-8F774B0B21BA}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{8126C37E-493A-4344-9474-67D2CF7725B9}"
+	ProjectSection(SolutionItems) = preProject
+		tools\CreateNugetPackages.ps1 = tools\CreateNugetPackages.ps1
+		tools\SetVersion.ps1 = tools\SetVersion.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
