@@ -1,0 +1,39 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/MatthewRudolph/Airy-ApplicationInsights-Owin/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/MatthewRudolph/Airy-ApplicationInsights-Owin</projectUrl>
+    <iconUrl>https://raw.github.com/MatthewRudolph/Airy-ApplicationInsights-Owin/master/AiryNugetIcon128x128.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides Application Insights request and error tracking for both ASP.Net MVC and Web API using OWIN running on IIS.</description>
+    <summary>
+      Provides Application Insights request and error tracking for both ASP.Net MVC and Web API using OWIN running on IIS.
+      - Correct Operation Name resolution for attribute based routing in both ASP.NET MVC and WebApi (with and without parameter names.)
+      - Tracking of errors in the ASP.Net MVC, Web API and OWIN pipelines. Including correlation with tracked requests.
+    </summary>
+    <releaseNotes>Release Summary: https://github.com/MatthewRudolph/Airy-ApplicationInsights-Owin/blob/master/ReleaseNotes.txt </releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Application Insights Owin WebAPI ASP.Net MVC Airy</tags>
+    <dependencies>
+      <!-- We allow fix and new feature version upgrades for dependencies but no new major versions that may have breaking changes.-->
+
+      <dependency id="Microsoft.ApplicationInsights" version="[2.1.0,3]" />
+      <dependency id="Microsoft.AspNet.Mvc" version="[5.2.3,6]" />
+
+
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.3,6]" />
+      <dependency id="Microsoft.AspNet.WebApi.Owin" version="[5.2.3,6]"/>
+
+      <dependency id="Microsoft.Owin" version="[3.0.1,4]" />
+      <dependency id="Microsoft.Owin.Host.SystemWeb" version="[3.0.1,6]" />
+
+
+      <dependency id="Owin" version="[1.0,2]" />
+    </dependencies>
+  </metadata>
+</package>
