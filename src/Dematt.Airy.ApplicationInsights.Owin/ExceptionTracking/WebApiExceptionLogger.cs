@@ -32,8 +32,6 @@ namespace Dematt.Airy.ApplicationInsights.Owin.ExceptionTracking
                     exceptionTelemetry.Context.Operation.Name = context.Request.Method + " " + name;
                 }
                 _telemetryClient.TrackException(exceptionTelemetry);
-
-                //_telemetryClient.TrackException(context.Exception);
             }
         }
     }
