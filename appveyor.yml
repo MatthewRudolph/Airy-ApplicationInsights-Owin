@@ -71,12 +71,12 @@
     verbosity: minimal
   before_test:
   - cmd: >-
-      $siteRoot = $env:APPVEYOR_BUILD_VERSION + "/samples/Dematt.Airy.ApplicationInsights.Sample"
+      SET siteRoot = $env:APPVEYOR_BUILD_VERSION + "/samples/Dematt.Airy.ApplicationInsights.Sample"
 
-      echo $siteRoot
+      echo %siteRoot%
 
       cd \Program Files\IIS Express
 
-      start /wait iisexpress /path:$siteRoot /port:11156 -PassThru
+      start /wait iisexpress /path:%siteRoot% /port:11156 -PassThru
 
       echo "Start operations"
