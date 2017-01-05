@@ -72,13 +72,10 @@
     publish_nuget: true
     verbosity: minimal
   before_test:
-  - cmd: >-
-      SET siteRoot = $env:APPVEYOR_BUILD_FOLDER + "\samples\Dematt.Airy.ApplicationInsights.Sample"
+  - ps: >-
+      Import-Module .\tools\ControlIisExpress.psm1
 
-      echo %siteRoot%
+      Start-IISExpress "C:\projects\Airy-ApplicationInsights-Owin\samples\Dematt.Airy.ApplicationInsights.Sample" 11156
 
-      "C:\Program Files (x86)\IIS Express\iisexpress" /path:"C:\projects\airy-applicationinsights-owin\samples\Dematt.Airy.ApplicationInsights.Sample" /port:11156
-
-      echo "Starting IIS Express"
   on_finish:
     - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

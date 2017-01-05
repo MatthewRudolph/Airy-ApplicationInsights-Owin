@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{8126C37E-493A-4344-9474-67D2CF7725B9}"
 	ProjectSection(SolutionItems) = preProject
+		tools\ControlIisExpress.psm1 = tools\ControlIisExpress.psm1
 		tools\CreateNugetPackages.ps1 = tools\CreateNugetPackages.ps1
 		tools\SetVersion.ps1 = tools\SetVersion.ps1
 	EndProjectSection
