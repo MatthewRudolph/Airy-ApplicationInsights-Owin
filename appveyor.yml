@@ -69,3 +69,6 @@
   build:
     publish_nuget: true
     verbosity: minimal
+  before_test:
+  - cmd: >-
+      devenv /run "$env:appveyor_build_folder\Dematt.Airy.ApplicationInsights.Owin.sln"
