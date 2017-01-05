@@ -57,6 +57,8 @@
       - /release.*/
       - v([0-9]+)\.([0-9]+)\.([0-9]+)
 
+  init:
+    - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   version: 0.1.0.{build}
   services:
   before_build:
@@ -67,12 +69,8 @@
 
       nuget restore
   build:
-    init:
-      - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     publish_nuget: true
     verbosity: minimal
-    on_finish:
-      - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   before_test:
   - cmd: >-
       SET siteRoot = $env:APPVEYOR_BUILD_VERSION + "/samples/Dematt.Airy.ApplicationInsights.Sample"
@@ -84,3 +82,5 @@
       start /wait iisexpress /path:%siteRoot% /port:11156 -PassThru
 
       echo "Start operations"
+  on_finish:
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
