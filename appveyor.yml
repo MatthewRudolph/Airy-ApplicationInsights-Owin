@@ -67,8 +67,12 @@
 
       nuget restore
   build:
+    init:
+      - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     publish_nuget: true
     verbosity: minimal
+    on_finish:
+      - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   before_test:
   - cmd: >-
       SET siteRoot = $env:APPVEYOR_BUILD_VERSION + "/samples/Dematt.Airy.ApplicationInsights.Sample"
