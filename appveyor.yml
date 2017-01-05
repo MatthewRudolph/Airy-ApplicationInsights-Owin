@@ -70,7 +70,9 @@
     publish_nuget: true
     verbosity: minimal
   before_test:
-  - ps: >-
-      Write-Host "Start IIS Express..."
-      Start-Job -Name RunIisExpress2 -Scriptblock {& 'C:\Program Files (x86)\IIS Express\iisexpress.exe' /path:"$env:APPVEYOR_BUILD_FOLDER\samples\Dematt.Airy.ApplicationInsights.Sample" /port:11156}
-      Wait-Job -Name RunIisExpress2 -Timeout 30
+  - cmd: >-
+      cd \Program Files\IIS Express
+
+      start /wait iisexpress /path:%APPVEYOR_BUILD_FOLDER%/samples/Dematt.Airy.ApplicationInsights.Sample /port:11156 -PassThru
+
+      echo "Start operations"
