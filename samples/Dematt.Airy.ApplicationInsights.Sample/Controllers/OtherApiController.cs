@@ -4,19 +4,26 @@ using System.Web.Http;
 
 namespace Dematt.Airy.ApplicationInsights.Sample.Controllers
 {
+    [RoutePrefix("api/other")]
     public class OtherApiController : ApiController
     {
-        // GET api/values/attribute/5
+        /// <summary>
+        /// Web API attribute based route with array parameter in url.
+        /// </summary>
+        /// <remarks>GET api/other/attribute/5</remarks>
         [AcceptVerbs("GET")]
-        [Route("api/other/{id:int}")]
+        [Route("attribute/{id:int}")]
         public string AttributeGet(int id, [FromUri]List<int> notId)
         {
             return id.ToString();
         }
 
-        // GET api/values/error/6
+        /// <summary>
+        /// Web API attribute based route with array parameter in url that errors.
+        /// </summary>
+        /// <remarks>GET api/other/attribute/error/6</remarks>
         [AcceptVerbs("GET")]
-        [Route("api/error/{id:int}")]
+        [Route("attribute/error/{id:int}")]
         public string AttributeError(int id, [FromUri]List<int> notId)
         {
             return new Guid(id.ToString()).ToString();

@@ -17,9 +17,13 @@ namespace Dematt.Airy.ApplicationInsights.Owin.ExceptionTracking
             _sdkVersion = SdkVersionUtils.GetSdkVersion("owin:");
         }
 
-        public override void OnException(ExceptionContext filterContext)        {            if (filterContext != null && filterContext.HttpContext != null && filterContext.Exception != null)            {
+        public override void OnException(ExceptionContext filterContext)
+        {
+            if (filterContext != null && filterContext.HttpContext != null && filterContext.Exception != null)
+            {
                 //If customError is Off, then AI HTTPModule will report the exception
-                if (filterContext.HttpContext.IsCustomErrorEnabled)                {
+                if (filterContext.HttpContext.IsCustomErrorEnabled)
+                {
                     var exceptionTelemetry = new ExceptionTelemetry(filterContext.Exception);
                     exceptionTelemetry.Context.GetInternalContext().SdkVersion = _sdkVersion;
 
@@ -31,6 +35,9 @@ namespace Dematt.Airy.ApplicationInsights.Owin.ExceptionTracking
                         exceptionTelemetry.Context.Operation.Name = filterContext.HttpContext.Request.HttpMethod + " " + name;
                     }
                     _telemetryClient.TrackException(exceptionTelemetry);
-                }            }            base.OnException(filterContext);        }
+                }
+            }
+            base.OnException(filterContext);
+        }
     }
 }
