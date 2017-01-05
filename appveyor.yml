@@ -73,14 +73,12 @@
     verbosity: minimal
   before_test:
   - cmd: >-
-      SET siteRoot = $env:APPVEYOR_BUILD_VERSION + "/samples/Dematt.Airy.ApplicationInsights.Sample"
+      SET siteRoot = $env:APPVEYOR_BUILD_FOLDER + "/samples/Dematt.Airy.ApplicationInsights.Sample"
 
       echo %siteRoot%
 
-      cd \Program Files\IIS Express
+      "C:\Program Files(x86)\IIS Express\iisexpress" /path:"$env:APPVEYOR_BUILD_FOLDER/samples/Dematt.Airy.ApplicationInsights.Sample" /port:11156
 
-      start /wait iisexpress /path:%siteRoot% /port:11156 -PassThru
-
-      echo "Start operations"
+      echo "Starting IIS Express"
   on_finish:
     - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
