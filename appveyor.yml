@@ -77,7 +77,7 @@
 
       echo %siteRoot%
 
-      "C:\Program Files(x86)\IIS Express\iisexpress" /path:"C:\projects\airy-applicationinsights-owin\samples\Dematt.Airy.ApplicationInsights.Sample" /port:11156
+      "C:\Program Files (x86)\IIS Express\iisexpress" /path:"C:\projects\airy-applicationinsights-owin\samples\Dematt.Airy.ApplicationInsights.Sample" /port:11156
 
       echo "Starting IIS Express"
   on_finish:
