@@ -71,4 +71,4 @@
     verbosity: minimal
   before_test:
   - cmd: >-
-      devenv /run "$env:appveyor_build_folder\Dematt.Airy.ApplicationInsights.Owin.sln"
+      "%PROGRAMFILES(x86)%\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" /run "$env:appveyor_build_folder\Dematt.Airy.ApplicationInsights.Owin.sln"
