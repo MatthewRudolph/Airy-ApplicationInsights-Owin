@@ -70,5 +70,7 @@
     publish_nuget: true
     verbosity: minimal
   before_test:
-  - cmd: >-
-      "%PROGRAMFILES(x86)%\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" /run "$env:appveyor_build_folder\Dematt.Airy.ApplicationInsights.Owin.sln"
+  - ps: >-
+      Write-Host "Start IIS Express..."
+      Start-Job -Name RunIisExpress2 -Scriptblock {& 'C:\Program Files (x86)\IIS Express\iisexpress.exe' /path:"$env:APPVEYOR_BUILD_FOLDER\samples\Dematt.Airy.ApplicationInsights.Sample" /port:11156}
+      Wait-Job -Name RunIisExpress2 -Timeout 30
