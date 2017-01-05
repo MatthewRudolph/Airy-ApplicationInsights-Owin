@@ -1,4 +1,7 @@
-﻿using System.Web;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Dematt.Airy.ApplicationInsights.Owin.ActionFilters
@@ -26,7 +29,12 @@ namespace Dematt.Airy.ApplicationInsights.Owin.ActionFilters
             string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
             string actionName = filterContext.ActionDescriptor.ActionName;
 
-            string name = controllerName + "/" + actionName;
+            // For convention based routing the ActionName for non-default actions is returned in all lowercase.
+            // We need to use reflection to get the correctly cased action/method name.
+            MethodInfo controllerMethod = filterContext.Controller.GetType().GetMethods().First(x => x.Name.Equals(actionName, StringComparison.OrdinalIgnoreCase));
+            string methodName = controllerMethod.Name;
+
+            string name = controllerName + "/" + methodName;
 
             if (_options.IncludeParamterNames)
             {
