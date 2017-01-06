@@ -27,6 +27,7 @@ namespace Dematt.Airy.ApplicationInsights.Owin
 
             httpConfiguration.Filters.Add(new WebApiRouteFilterAttribute(options));
             GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(options));
+            GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient));
             builder.Use<RequestTrackingMiddleware>(telemetryClient);
 
             return builder;

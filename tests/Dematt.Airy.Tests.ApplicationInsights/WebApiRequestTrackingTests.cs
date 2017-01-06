@@ -55,6 +55,17 @@ namespace Dematt.Airy.Tests.ApplicationInsights
         }
 
         [Test]
+        public void SucessfulAttributeBasedRouteRequestWithMultipleParameters()
+        {
+            TestClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Bot");
+            using (var request = new HttpRequestMessage(HttpMethod.Get, SiteBaseUrl + "api/other/attribute/5?notId=4&notId=3"))
+            using (var response = TestClient.SendAsync(request, CancellationToken.None).Result)
+            {
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            }
+        }
+
+        [Test]
         public void ServerErrorConventionBasedRouteRequest()
         {
             TestClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Bot");

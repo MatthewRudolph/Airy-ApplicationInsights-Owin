@@ -10,7 +10,7 @@ namespace Dematt.Airy.ApplicationInsights.Sample.Controllers
         /// <summary>
         /// Web API attribute based route with array parameter in url.
         /// </summary>
-        /// <remarks>GET api/other/attribute/5</remarks>
+        /// <remarks><![CDATA[GET api/other/attribute/5?notId=4&notId=3]]></remarks>
         [AcceptVerbs("GET")]
         [Route("attribute/{id:int}")]
         public string AttributeGet(int id, [FromUri]List<int> notId)

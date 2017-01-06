@@ -35,9 +35,11 @@ namespace Dematt.Airy.ApplicationInsights.Sample
             HttpConfig.IncludeErrorDetailPolicy = GetWebApiErrorsMode();
 
             // Proposed nuget long/custom style.
-            HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(new TelemetryClient()));
+            var telemetryClient = new TelemetryClient();
+            HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));
             HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false }));
             GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false }));
+            GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient));
             app.Use<RequestTrackingMiddleware>(new TelemetryClient());
 
             // Proposed nuget extension style.
@@ -60,7 +62,7 @@ namespace Dematt.Airy.ApplicationInsights.Sample
 
             // Configure all the required MVC stuff for the default Visual Studio Template.
             AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             RouteConfig.RegisterMvcRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
