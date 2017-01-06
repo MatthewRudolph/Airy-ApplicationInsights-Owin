@@ -1,10 +1,13 @@
-# Airy-ApplicationInsights-Owin #
+# Dematt.Airy.ApplicationInsights.Owin #
 
-Use this library when you need Application Insights request and error tracking for **both** ASP.Net MVC and Web API using OWIN running on **IIS**.
+#### Summary ####
+This library enables Application Insights request and error tracking for ASP.Net MVC and Web API using OWIN when running on **IIS**.
 
-If you are self hosting Web API using OWIN then the [applicationinsights-owinextensions](https://github.com/marcinbudny/applicationinsights-owinextensions) project may be a better fit as it works for both IIS and self hosted configurations.
+The default Request Tracking HttpModule for Application Insights does not resolve the operation name for attribute based routing correctly it defaults to using part of the Url.  This library fixes that issue so that requests to attribute based routes send application insights requests with the same name format as those made to convention based routes.
 
-#### Features: ####
+If you are self hosting Web API using OWIN then take a look at the [applicationinsights-owinextensions](https://github.com/marcinbudny/applicationinsights-owinextensions) project, as this project only works when IIS or IISExpress is used for the Owin host.
+
+#### Features ####
   - Correct Operation Name resolution for attribute based routing in both ASP.NET MVC & WebApi (with and without parameter names.)
   - Tracking of errors in the ASP.Net MVC, Web API and OWIN pipelines. Including correlation with tracked requests.
 
