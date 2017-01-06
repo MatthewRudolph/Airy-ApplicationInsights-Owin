@@ -76,8 +76,6 @@ namespace Dematt.Airy.ApplicationInsights.Owin.Middleware
                     requestTelemetry.Name = context.Request.Method + " " + name;
                 }
 
-                string path = context.Request.Path.ToString();
-
                 requestTelemetry.Duration = sw.Elapsed;
                 requestTelemetry.ResponseCode = context.Response.StatusCode.ToString();
                 requestTelemetry.Success = !requestFailed && (context.Response.StatusCode < 400);
