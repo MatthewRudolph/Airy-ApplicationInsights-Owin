@@ -42,6 +42,7 @@ If you are self hosting Web API using OWIN then take a look at the [applicationi
     </Add>
     ```
   - Add the following code to you Startup.cs file.
+
     ```C#
     public void Configuration(IAppBuilder app)
     {
