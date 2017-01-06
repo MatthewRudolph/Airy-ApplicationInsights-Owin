@@ -14,7 +14,7 @@ namespace Dematt.Airy.ApplicationInsights.Owin.ActionFilters
         private readonly RouteFilterOptions _options;
 
         /// <summary>
-        /// Creates an instance of the <see cref="MvcRouteFilterAttribute"/> using the options passed.
+        /// Creates an instance of the <see cref="MvcRouteFilterAttribute"/> using the <see cref="RouteFilterOptions"/> passed.
         /// </summary>
         public MvcRouteFilterAttribute(RouteFilterOptions options)
         {

@@ -15,7 +15,7 @@ namespace Dematt.Airy.ApplicationInsights.Owin
     public static class AppBuilderExtension
     {
         /// <summary>
-        /// Extension method for <see cref="IAppBuilder"/> that configures Application Insights for Owin.
+        /// Extension method for <see cref="IAppBuilder"/> that configures Application Insights for ASP.NET MVC and Web API using Owin running on IIS.
         /// </summary>
         public static IAppBuilder UseApplicationInsightsOwin(this IAppBuilder builder, HttpConfiguration httpConfiguration,
             RouteFilterOptions options, TelemetryClient telemetryClient = null)

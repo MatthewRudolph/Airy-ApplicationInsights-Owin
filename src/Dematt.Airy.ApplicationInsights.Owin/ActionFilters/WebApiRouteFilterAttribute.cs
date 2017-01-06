@@ -12,7 +12,7 @@ namespace Dematt.Airy.ApplicationInsights.Owin.ActionFilters
         private readonly RouteFilterOptions _options;
 
         /// <summary>
-        /// Creates an instance of the <see cref="WebApiRouteFilterAttribute"/> using the options passed.
+        /// Creates an instance of the <see cref="WebApiRouteFilterAttribute"/> using the <see cref="RouteFilterOptions"/> passed.
         /// </summary>
         public WebApiRouteFilterAttribute(RouteFilterOptions options)
         {
