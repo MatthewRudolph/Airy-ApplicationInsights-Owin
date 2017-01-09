@@ -79,7 +79,7 @@ If you are self hosting Web API using OWIN then take a look at the [applicationi
 
 ### Options ###
 
-  - ##### Registering individual components #####
+  - #### Registering individual components ####
     If you do not want to change the Operation Name values used by Application Insights for request tracking or you do not want to log exceptions then you can register the ASP.Net MVC and Web API filters individually instead of using the AppBuilder extension method.
     
     Custom style for registering ApplicationInsights.Owin that allows registering of individual components.
@@ -103,7 +103,7 @@ If you are self hosting Web API using OWIN then take a look at the [applicationi
 
   - #### Configuration Options ####
     There are two options that can be supplied to the controller and action name capture filters that are passed using an instance of the RouteFilterOptions class.
-    - IncludeParamterNames  
+    - ##### IncludeParamterNames  #####
       Sets if the parameter names of the action used should be appended to the Operation Name value used by Application Insights requests.
       
       Default value is false
@@ -123,7 +123,7 @@ If you are self hosting Web API using OWIN then take a look at the [applicationi
 
        This is useful if you have MVC or API controllers with the same method name but different parameters, as it allows them to be grouped correctly in the Application Insights portal.
 
-    - public string WebApiRoutePrefix  
-      Sets the prefix to pre-append to the ControllerAction string when a Web Api controller is used.
+    - ##### WebApiRoutePrefix  #####
+      Sets the prefix to pre-append to the Operation Name value used by Application Insights requests when a Web Api controller is used.
       
       Default value is "api"
