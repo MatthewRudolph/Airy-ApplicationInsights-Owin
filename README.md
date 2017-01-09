@@ -82,22 +82,29 @@ If you are self hosting Web API using OWIN then take a look at the [applicationi
   - ##### Registering individual components #####
     If you do not want to change the Operation Name values used by Application Insights for request tracking or you do not want to log exceptions then you can register the ASP.Net MVC and Web API filters individually instead of using the AppBuilder extension method.
     
+    Custom style for registering ApplicationInsights.Owin that allows registering of individual components.
+
     ```C#
-    // Custom style for registering ApplicationInsights.Owin that allows registering of individual components.
+    // Create telemtry client (or obtain from your IoC container of choice.)
     var telemetryClient = new TelemetryClient();
-    HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));  // Web API application insights error logging.
-    HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // Web API application insights controller and action name capture.
-    GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // ASP.Net MVC application insights controller and action name capture.
-    GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient)); // ASP.Net MVC application insights error logging.
-    app.Use<RequestTrackingMiddleware>(new TelemetryClient()); // Request tracking middleware is required for both Web API and ASP.Net
+    // Web API application insights error logging.
+    HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));
+    // Web API application insights controller and action name capture.
+    HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false }));
+     // ASP.Net MVC application insights controller and action name capture.
+    GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false }));
+    // ASP.Net MVC application insights error logging.
+    GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient));
+    // Request tracking middleware is required for both Web API and ASP.Net
+    app.Use<RequestTrackingMiddleware>(new TelemetryClient());
     ```
 
     You'll need to register the **RequestTrackingMiddleware** at minimum to allow sending of Request Telemetries but the name capture and error logging components are optional. 
 
   - #### Configuration Options ####
     There are two options that can be supplied to the controller and action name capture filters that are passed using an instance of the RouteFilterOptions class.
-    - IncludeParamterNames
-      Controls if the parameter names of the action used should be appended to the ControllerAction string that is stored in the owin context.
+    - IncludeParamterNames  
+      Sets if the parameter names of the action used should be appended to the Operation Name value used by Application Insights requests.
       
       Default value is false
 
@@ -109,12 +116,14 @@ If you are self hosting Web API using OWIN then take a look at the [applicationi
           return "value";
       }
       ```
-       With IncludeParamterNames set to false the Operation Name is set to GET api/Values/Get
-       With IncludeParamterNames set to true the Operation Name is set to GET api/Values/Get/{id}
+       With IncludeParamterNames set to false the Operation Name is set to:
+       **GET api/Values/Get**  
+       With IncludeParamterNames set to true the Operation Name is set to:
+       **GET api/Values/Get/\{id\}**
 
        This is useful if you have MVC or API controllers with the same method name but different parameters, as it allows them to be grouped correctly in the Application Insights portal.
 
-    - public string WebApiRoutePrefix
+    - public string WebApiRoutePrefix  
       Sets the prefix to pre-append to the ControllerAction string when a Web Api controller is used.
       
       Default value is "api"
