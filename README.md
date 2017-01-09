@@ -3,7 +3,10 @@
 ### Summary ###
 This library enables Application Insights request and error tracking for ASP.Net MVC and Web API using OWIN when running on **IIS**.
 
-The default Request Tracking HttpModule for Application Insights does not resolve the operation name for attribute based routing correctly it defaults to using part of the Url.  This library fixes that issue so that requests to attribute based routes send application insights requests with the same name format as those made to convention based routes.
+The default installation of Application Insights (in Visual Studio) does not track Web API requests.
+They could actually be tracked but the default configuration file has a filter for TransferRequestHandler which prevents them for being sent.  
+Also the default Request Tracking HttpModule for Application Insights does not resolve the operation name for attribute based routing correctly.  It defaults to using part of the Url.  
+This library fixes those issues enabling tracking of Web API request and setting the Operation Name for attribute based and convention based routes in the same format.
 
 For example requests to:
 
