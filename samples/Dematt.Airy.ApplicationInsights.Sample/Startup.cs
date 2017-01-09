@@ -36,15 +36,15 @@ namespace Dematt.Airy.ApplicationInsights.Sample
             HttpConfig.IncludeErrorDetailPolicy = GetWebApiErrorsMode();
 
             // Custom style for registering ApplicationInsights.Owin that allows registering of individual components.
-            var telemetryClient = new TelemetryClient();
-            HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));  // Web API application insights error logging.
-            HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // Web API application insights controller and action name capture.
-            GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // ASP.Net MVC application insights controller and action name capture.
-            GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient)); // ASP.Net MVC application insights error logging.
-            app.Use<RequestTrackingMiddleware>(new TelemetryClient()); // Request tracking middleware is required for both Web API and ASP.Net
+            //var telemetryClient = new TelemetryClient();
+            //HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));  // Web API application insights error logging.
+            //HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // Web API application insights controller and action name capture.
+            //GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // ASP.Net MVC application insights controller and action name capture.
+            //GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient)); // ASP.Net MVC application insights error logging.
+            //app.Use<RequestTrackingMiddleware>(new TelemetryClient()); // Request tracking middleware is required for both Web API and ASP.Net
 
             // AppBuilder extension that does all of the above.
-            //app.UseApplicationInsightsOwin(HttpConfig, new RouteFilterOptions(), new TelemetryClient());
+            app.UseApplicationInsightsOwin(HttpConfig, new RouteFilterOptions {IncludeParamterNames = true}, new TelemetryClient());
 
             // Middleware for testing errors raised in middlewares.
             app.Use<ForceExceptionMiddleware>();
