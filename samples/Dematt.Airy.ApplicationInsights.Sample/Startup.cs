@@ -10,6 +10,7 @@ using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Dematt.Airy.ApplicationInsights.Owin;
 using Dematt.Airy.ApplicationInsights.Owin.ActionFilters;
 using Dematt.Airy.ApplicationInsights.Owin.ExceptionTracking;
 using Dematt.Airy.ApplicationInsights.Owin.Middleware;
@@ -34,16 +35,16 @@ namespace Dematt.Airy.ApplicationInsights.Sample
 
             HttpConfig.IncludeErrorDetailPolicy = GetWebApiErrorsMode();
 
-            // Proposed nuget long/custom style.
-            var telemetryClient = new TelemetryClient();
-            HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));
-            HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false }));
-            GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false }));
-            GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient));
-            app.Use<RequestTrackingMiddleware>(new TelemetryClient());
+            // Custom style for registering ApplicationInsights.Owin that allows registering of individual components.
+            //var telemetryClient = new TelemetryClient();
+            //HttpConfig.Services.Add(typeof(IExceptionLogger), new WebApiExceptionLogger(telemetryClient));  // Web API application insights error logging.
+            //HttpConfig.Filters.Add(new WebApiRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // Web API application insights controller and action name capture.
+            //GlobalFilters.Filters.Add(new MvcRouteFilterAttribute(new RouteFilterOptions { IncludeParamterNames = false })); // ASP.Net MVC application insights controller and action name capture.
+            //GlobalFilters.Filters.Add(new MvcExceptionHandler(telemetryClient)); // ASP.Net MVC application insights error logging.
+            //app.Use<RequestTrackingMiddleware>(new TelemetryClient()); // Request tracking middleware is required for both Web API and ASP.Net
 
-            // Proposed nuget extension style.
-            //app.UseApplicationInsightsOwin(HttpConfig, new RouteFilterOptions(), new TelemetryClient());
+            // AppBuilder extension that does all of the above.
+            app.UseApplicationInsightsOwin(HttpConfig, new RouteFilterOptions {IncludeParamterNames = true}, new TelemetryClient());
 
             // Middleware for testing errors raised in middlewares.
             app.Use<ForceExceptionMiddleware>();

@@ -6,17 +6,26 @@ using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 namespace Dematt.Airy.ApplicationInsights.Owin.ExceptionTracking
 {
+    /// <summary>
+    /// Web API exception logger that logs exception details to Application Insights.
+    /// </summary>
     public class WebApiExceptionLogger : ExceptionLogger
     {
         private readonly TelemetryClient _telemetryClient;
         private readonly string _sdkVersion;
 
+        /// <summary>
+        /// Creates an instance of the <see cref="WebApiExceptionLogger"/> using the <see cref="TelemetryClient"/> passed in.
+        /// </summary>
         public WebApiExceptionLogger(TelemetryClient telemetryClient)
         {
             _telemetryClient = telemetryClient ?? new TelemetryClient();
             _sdkVersion = SdkVersionUtils.GetSdkVersion("owin:");
         }
 
+        /// <summary>
+        /// Overrides the default Log method to send details of the error to Application Insights.
+        /// </summary>
         public override void Log(ExceptionLoggerContext context)
         {
             if (context != null && context.Exception != null)
